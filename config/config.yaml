@@ -147,25 +147,32 @@ rss:
       name: "OpenAI 官方博客"
       url: "https://openai.com/blog/rss.xml"
 
-    - id: "anthropic-news"
-      name: "Anthropic (Claude)"
-      url: "https://www.anthropic.com/rss.xml"
+    # Anthropic 无官方RSS，暂时禁用
+    # - id: "anthropic-news"
+    #   name: "Anthropic (Claude)"
+    #   url: "https://www.anthropic.com/rss.xml"
+    #   enabled: false  # 无官方RSS，可通过 releasebot.io 获取更新
 
+    # Google AI 和 DeepMind 博客需要代理访问，如无代理请禁用
     - id: "google-ai-blog"
       name: "Google AI Blog"
       url: "https://blog.google/technology/ai/rss/"
+      # enabled: false  # 需要代理
 
     - id: "deepmind-blog"
       name: "DeepMind Blog"
-      url: "https://deepmind.google/blog/rss.xml"
+      url: "https://deepmind.google/discover/blog/rss.xml"  # 更新URL
+      # enabled: false  # 需要代理
 
     - id: "microsoft-ai"
       name: "Microsoft AI Blog"
       url: "https://blogs.microsoft.com/ai/feed/"
 
+    # Meta AI 博客需要代理访问
     - id: "meta-ai"
       name: "Meta AI Blog"
       url: "https://ai.meta.com/blog/rss/"
+      # enabled: false  # 需要代理
 
     - id: "nvidia-blog"
       name: "NVIDIA Blog"
@@ -191,29 +198,38 @@ rss:
       name: "Cloudflare Blog"
       url: "https://blog.cloudflare.com/rss/"
 
+    # Docker Blog 经常连接重置，可尝试 RSSHub 替代
     - id: "docker-blog"
       name: "Docker Blog"
-      url: "https://www.docker.com/blog/feed/"
+      url: "https://rsshub.app/docker/blog"  # RSSHub 替代方案
+      # url: "https://www.docker.com/blog/feed/"  # 原始URL（常被拒绝）
 
     # ═══════════════════════════════════════════════════════════════
     #                     AI/ML 技术社区
     # ═══════════════════════════════════════════════════════════════
 
+    # Hugging Face 需要代理访问，可用社区维护的 Papers RSS
     - id: "huggingface-blog"
       name: "Hugging Face Blog"
       url: "https://huggingface.co/blog/feed.xml"
+      # enabled: false  # 需要代理
+      # 替代方案: https://papers.takara.ai/api/feed (HF Daily Papers)
 
+    # PyTorch Blog RSS XML格式问题，使用 RSSHub 替代
     - id: "pytorch-blog"
       name: "PyTorch Blog"
-      url: "https://pytorch.org/blog/feed.xml"
+      url: "https://rsshub.app/pytorch/blog"  # RSSHub 替代
+      # url: "https://pytorch.org/blog/feed.xml"  # 原始URL（XML格式问题）
 
     - id: "tensorflow-blog"
       name: "TensorFlow Blog"
       url: "https://blog.tensorflow.org/feeds/posts/default?alt=rss"
 
-    - id: "openai-research"
-      name: "OpenAI Research"
-      url: "https://openai.com/research/rss.xml"
+    # OpenAI Research RSS 已与主博客合并，禁用此源
+    # - id: "openai-research"
+    #   name: "OpenAI Research"
+    #   url: "https://openai.com/research/rss.xml"
+    #   enabled: false  # 404，已与 openai-blog 合并
 
     # ═══════════════════════════════════════════════════════════════
     #                     编程语言/框架官方
@@ -223,9 +239,11 @@ rss:
       name: "Rust Blog"
       url: "https://blog.rust-lang.org/feed.xml"
 
+    # Go Blog 需要代理访问
     - id: "go-blog"
       name: "Go Blog"
       url: "https://go.dev/blog/feed.atom"
+      # enabled: false  # 需要代理
 
     - id: "python-insider"
       name: "Python Insider"
@@ -235,9 +253,11 @@ rss:
       name: "Node.js Blog"
       url: "https://nodejs.org/en/feed/blog.xml"
 
+    # Deno Blog RSS XML格式问题，使用 RSSHub 替代
     - id: "deno-blog"
       name: "Deno Blog"
-      url: "https://deno.com/blog/rss.xml"
+      url: "https://rsshub.app/deno/blog"  # RSSHub 替代
+      # url: "https://deno.com/blog/rss.xml"  # 原始URL（XML格式问题）
 
     - id: "react-blog"
       name: "React Blog"
@@ -267,13 +287,17 @@ rss:
       name: "AWS News Blog"
       url: "https://aws.amazon.com/blogs/aws/feed/"
 
+    # Azure Updates RSS XML格式问题，暂时禁用
     - id: "azure-updates"
       name: "Azure Updates"
       url: "https://azure.microsoft.com/en-us/updates/feed/"
+      enabled: false  # XML格式问题
 
+    # Google Cloud Blog 需要代理访问
     - id: "gcp-blog"
       name: "Google Cloud Blog"
       url: "https://cloud.google.com/blog/rss"
+      enabled: false  # 需要代理
 
     - id: "kubernetes-blog"
       name: "Kubernetes Blog"
@@ -283,9 +307,11 @@ rss:
       name: "HashiCorp Blog"
       url: "https://www.hashicorp.com/blog/feed.xml"
 
+    # Supabase Blog RSS XML格式问题，使用 RSSHub 替代
     - id: "supabase-blog"
       name: "Supabase Blog"
-      url: "https://supabase.com/blog/rss.xml"
+      url: "https://rsshub.app/supabase/blog"  # RSSHub 替代
+      # url: "https://supabase.com/blog/rss.xml"  # 原始URL（XML格式问题）
 
     - id: "planetscale-blog"
       name: "PlanetScale Blog"
@@ -299,25 +325,31 @@ rss:
       name: "Lobsters"
       url: "https://lobste.rs/rss"
 
+    # Reddit 需要代理访问，可使用 RSSHub 替代
     - id: "reddit-programming"
       name: "Reddit r/programming"
-      url: "https://www.reddit.com/r/programming/.rss"
+      url: "https://rsshub.app/reddit/subreddit/programming"  # RSSHub 替代
+      # url: "https://www.reddit.com/r/programming/.rss"  # 需要代理
 
     - id: "reddit-rust"
       name: "Reddit r/rust"
-      url: "https://www.reddit.com/r/rust/.rss"
+      url: "https://rsshub.app/reddit/subreddit/rust"  # RSSHub 替代
+      # url: "https://www.reddit.com/r/rust/.rss"  # 需要代理
 
     - id: "reddit-golang"
       name: "Reddit r/golang"
-      url: "https://www.reddit.com/r/golang/.rss"
+      url: "https://rsshub.app/reddit/subreddit/golang"  # RSSHub 替代
+      # url: "https://www.reddit.com/r/golang/.rss"  # 需要代理
 
     - id: "dev-to"
       name: "DEV Community"
       url: "https://dev.to/feed"
 
+    # Medium 需要代理访问，可使用 RSSHub 替代
     - id: "medium-programming"
       name: "Medium Programming"
-      url: "https://medium.com/feed/tag/programming"
+      url: "https://rsshub.app/medium/tag/programming"  # RSSHub 替代
+      # url: "https://medium.com/feed/tag/programming"  # 需要代理
 
     # ═══════════════════════════════════════════════════════════════
     #                     科技新闻媒体
@@ -355,13 +387,17 @@ rss:
       name: "Krebs on Security"
       url: "https://krebsonsecurity.com/feed/"
 
+    # The Hacker News 需要代理访问（feedburner被墙）
     - id: "the-hacker-news"
       name: "The Hacker News (安全)"
-      url: "https://feeds.feedburner.com/TheHackersNews"
+      url: "https://rsshub.app/hackernews"  # RSSHub 替代（安全版）
+      # url: "https://feeds.feedburner.com/TheHackersNews"  # 需要代理
 
+    # BleepingComputer 禁止直接RSS访问
     - id: "bleeping-computer"
       name: "BleepingComputer"
-      url: "https://www.bleepingcomputer.com/feed/"
+      url: "https://rsshub.app/bleepingcomputer/news"  # RSSHub 替代
+      # url: "https://www.bleepingcomputer.com/feed/"  # 403 Forbidden
 
     # ═══════════════════════════════════════════════════════════════
     #                     中文技术博客
@@ -421,17 +457,21 @@ rss:
       name: "AlternativeTo"
       url: "https://alternativeto.net/news/feed/"
 
+    # BetaList RSS已失效，暂时禁用
     - id: "betalist"
       name: "BetaList"
       url: "https://betalist.com/feed"
+      enabled: false  # 404 网站已改版
 
     # ═══════════════════════════════════════════════════════════════
     #                     加密货币/区块链
     # ═══════════════════════════════════════════════════════════════
 
+    # CoinDesk 需要代理访问
     - id: "coindesk"
       name: "CoinDesk"
-      url: "https://www.coindesk.com/arc/outboundfeeds/rss/"
+      url: "https://rsshub.app/coindesk"  # RSSHub 替代
+      # url: "https://www.coindesk.com/arc/outboundfeeds/rss/"  # 需要代理
 
     - id: "cointelegraph"
       name: "Cointelegraph"
@@ -445,37 +485,49 @@ rss:
       name: "Decrypt"
       url: "https://decrypt.co/feed"
 
+    # Bankless 禁止直接RSS访问
     - id: "bankless"
       name: "Bankless"
       url: "https://www.bankless.com/rss.xml"
+      enabled: false  # 403 Forbidden
 
     - id: "defiant"
       name: "The Defiant"
       url: "https://thedefiant.io/feed"
 
+    # Foresight News RSS XML格式问题
     - id: "foresight-news"
       name: "Foresight News"
       url: "https://foresightnews.pro/rss"
+      enabled: false  # XML格式问题
 
+    # Messari 需要代理访问
     - id: "messari"
       name: "Messari Research"
       url: "https://messari.io/rss"
+      enabled: false  # 需要代理
 
+    # DeFiLlama 需要代理访问
     - id: "defillama"
       name: "DeFiLlama News"
       url: "https://defillama.com/rss/news"
+      enabled: false  # 需要代理
 
     # ═══════════════════════════════════════════════════════════════
     #                     中国金融/A股
     # ═══════════════════════════════════════════════════════════════
 
+    # 格隆汇 已取消RSS支持
     - id: "gelonghui"
       name: "格隆汇"
       url: "https://www.gelonghui.com/rss"
+      enabled: false  # 404 已取消RSS
 
+    # 金十数据 已取消RSS支持
     - id: "jin10"
       name: "金十数据"
       url: "https://www.jin10.com/rss"
+      enabled: false  # 404 已取消RSS
 
     # ═══════════════════════════════════════════════════════════════
     #                     美股/港股/全球市场
@@ -485,13 +537,17 @@ rss:
       name: "CNBC Markets"
       url: "https://www.cnbc.com/id/20910258/device/rss/rss.html"
 
+    # Bloomberg 需要代理访问
     - id: "bloomberg-markets"
       name: "Bloomberg Markets"
       url: "https://feeds.bloomberg.com/markets/news.rss"
+      enabled: false  # 需要代理
 
+    # Yahoo Finance 限流频繁
     - id: "yahoo-finance"
       name: "Yahoo Finance"
       url: "https://finance.yahoo.com/news/rssindex"
+      enabled: false  # 429 Too Many Requests
 
     - id: "seeking-alpha"
       name: "Seeking Alpha"
@@ -501,17 +557,23 @@ rss:
       name: "MarketWatch"
       url: "http://feeds.marketwatch.com/marketwatch/topstories/"
 
+    # Investing.com 禁止直接访问
     - id: "investing-com"
       name: "Investing.com"
-      url: "https://www.investing.com/rss/news.rss"
+      url: "https://cn.investing.com"
+      enabled: false  # 403 Forbidden
 
+    # 智通财经 服务器错误
     - id: "zhitongcaijing"
       name: "智通财经"
       url: "https://www.zhitongcaijing.com/rss.xml"
+      enabled: false  # 500 服务器错误
 
+    # 富途牛牛 已取消RSS
     - id: "futunn"
       name: "富途牛牛资讯"
       url: "https://news.futunn.com/rss"
+      enabled: false  # 404 已取消RSS
 
     # ═══════════════════════════════════════════════════════════════
     #                     政治/时政新闻
@@ -522,65 +584,86 @@ rss:
       name: "新华网"
       url: "http://www.xinhuanet.com/politics/news_politics.xml"
 
+    # 人民网 RSS地址已变更
     - id: "people-cn"
       name: "人民网-时政"
       url: "http://politics.people.com.cn/rss/politics.xml"
+      enabled: false  # 404 地址已变更
 
+    # 央视新闻 RSS地址已变更
     - id: "cctv-news"
       name: "央视新闻"
       url: "https://news.cctv.com/rss/china.xml"
+      enabled: false  # 404 地址已变更
 
     # --- 港澳台/华语媒体 ---
+    # 联合早报 RSS XML格式问题
     - id: "zaobao"
       name: "联合早报"
       url: "https://www.zaobao.com/rss/realtime/china"
+      enabled: false  # XML格式问题（mismatched tag）
 
+    # 端传媒 需要代理访问
     - id: "initium"
       name: "端传媒"
       url: "https://theinitium.com/newsfeed/"
       max_age_days: 7
+      enabled: false  # 需要代理
 
+    # 法广中文 需要代理访问
     - id: "rfi-cn"
       name: "法广中文"
       url: "https://www.rfi.fr/cn/rss"
+      enabled: false  # 需要代理
 
+    # 德国之声中文 需要代理访问
     - id: "dw-cn"
       name: "德国之声中文"
       url: "https://rss.dw.com/xml/rss-chi-all"
+      enabled: false  # 需要代理
 
     # --- 国际主流媒体 ---
+    # 以下国际媒体都需要代理访问
     - id: "bbc-world"
       name: "BBC World News"
       url: "https://feeds.bbci.co.uk/news/world/rss.xml"
+      enabled: false  # 需要代理
 
     - id: "reuters-world"
       name: "Reuters World"
       url: "https://www.reutersagency.com/feed/?best-topics=political-general"
+      enabled: false  # 404 URL已变更
 
     - id: "nyt-world"
       name: "NYT World"
       url: "https://rss.nytimes.com/services/xml/rss/nyt/World.xml"
+      enabled: false  # 需要代理
 
     - id: "guardian-world"
       name: "The Guardian World"
       url: "https://www.theguardian.com/world/rss"
+      enabled: false  # 需要代理
 
     - id: "politico"
       name: "Politico"
       url: "https://www.politico.com/rss/politicopicks.xml"
+      enabled: false  # 403 Forbidden
 
     - id: "foreign-affairs"
       name: "Foreign Affairs"
       url: "https://www.foreignaffairs.com/rss.xml"
+      enabled: false  # 需要代理
 
     # --- 财经政策 ---
     - id: "ft-world"
       name: "Financial Times World"
       url: "https://www.ft.com/world?format=rss"
+      enabled: false  # 需要代理
 
     - id: "economist"
       name: "The Economist"
       url: "https://www.economist.com/international/rss.xml"
+      enabled: false  # 需要代理
 
 
 # ===============================================================
@@ -948,6 +1031,13 @@ advanced:
 
   # 热榜爬虫技术参数
   crawler:
+    # NewsNow API 地址（支持自建实例）
+    # 默认使用公共实例，如遇到 500 错误可自建 NewsNow：
+    #   1. git clone https://github.com/ourongxing/newsnow && cd newsnow
+    #   2. pnpm install && pnpm dev
+    #   3. 修改下方 api_url 为 http://localhost:3000/api/s
+    api_url: "http://127.0.0.1:4444/api/s"
+    
     request_interval: 2000            # 请求间隔（毫秒）
     use_proxy: false                  # 是否启用代理
     default_proxy: "http://127.0.0.1:10801"

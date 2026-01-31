@@ -68,6 +68,7 @@ def _load_crawler_config(config_data: Dict) -> Dict:
     crawler_config = advanced.get("crawler", {})
     platforms_config = config_data.get("platforms", {})
     return {
+        "API_URL": crawler_config.get("api_url", "https://newsnow.busiyi.world/api/s"),
         "REQUEST_INTERVAL": crawler_config.get("request_interval", 100),
         "USE_PROXY": crawler_config.get("use_proxy", False),
         "DEFAULT_PROXY": crawler_config.get("default_proxy", ""),

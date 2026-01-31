@@ -155,7 +155,9 @@ class SystemManagementTools:
             if crawler_config.get("use_proxy"):
                 proxy_url = crawler_config.get("default_proxy")
             
-            fetcher = DataFetcher(proxy_url=proxy_url)
+            # 支持自定义 API 地址（用于自建 NewsNow 实例）
+            api_url = crawler_config.get("api_url")
+            fetcher = DataFetcher(proxy_url=proxy_url, api_url=api_url)
             request_interval = crawler_config.get("request_interval", 100)
 
             # 执行爬取
