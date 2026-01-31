@@ -31,13 +31,6 @@
 # 过滤标题党
 震惊
 
-# 成人内容全局过滤
-儿童色情
-未成年
-强奸
-猥亵儿童
-兽交
-
 
 
 # ───────────────────────────────────────────────────────────────
@@ -359,73 +352,471 @@
 #                         计算机/编程
 # ═══════════════════════════════════════════════════════════════
 
-[编程语言]
+# ───────────────────────────────────────────────────────────────
+#                         编程语言
+# ───────────────────────────────────────────────────────────────
+
+[Python]
 /\bPython\b/
+/\bPyPI\b/
+/\bDjango\b|\bFlask\b|\bFastAPI\b/
+
+[Rust]
 /\bRust\b/
+/\bCargo\b/
+/内存安全/
+
+[Go/Golang]
 /\bGolang\b|\bGo语言\b/
-/\bTypeScript\b|\bTS\b/
+/\bGoroutine\b/
+
+[JavaScript/TS]
 /\bJavaScript\b|\bJS\b/
+/\bTypeScript\b|\bTS\b/
+/\bNode\.js\b|\bNodeJS\b|\bDeno\b|\bBun\b/
 
-[开发工具]
-/\bGitHub\b/
-/\bGitLab\b/
-/\bVSCode\b|\bVS Code\b/
-/\bDocker\b|容器化/
+[Java]
+/\bJava\b/
+/\bSpring\b|\bSpringBoot\b/
+/\bJVM\b/
+/\bKotlin\b/
+
+[C/C++]
+/\bC\+\+\b|\bCpp\b/
+/\bC语言\b/
+/\bCMake\b/
+
+[其他语言]
+/\bSwift\b/
+/\bPHP\b/
+/\bRuby\b/
+/\bScala\b/
+/\bElixir\b/
+/\bZig\b/
+
+# ───────────────────────────────────────────────────────────────
+#                         网络安全
+# ───────────────────────────────────────────────────────────────
+
+[网络安全通用]
+网络安全
+信息安全
+/网安|安全漏洞/
+/\bCVE\b/
+/零日漏洞|0day/
+
+[黑客攻击]
+/黑客攻击|黑客入侵/
+/勒索软件|勒索病毒|\bRansomware\b/
+/钓鱼攻击|\bPhishing\b/
+/\bDDoS\b|拒绝服务/
+/\bAPT\b|高级持续威胁/
+/供应链攻击/
+
+[数据安全]
+数据泄露
+/隐私泄露|信息泄露/
+/数据安全/
+/\bGDPR\b/
+
+[安全技术]
+/渗透测试|\bPentest\b/
+/\bWAF\b|防火墙/
+/\bVPN\b/
+/加密|解密/
+/\bSSL\b|\bTLS\b|\bHTTPS\b/
+/身份认证|\bOAuth\b|\bJWT\b/
+/零信任/
+
+[安全厂商]
+/奇安信/
+/360安全/
+/深信服/
+/\bCrowdStrike\b/
+/\bPalo Alto\b/
+
+[CTF/安全竞赛]
+/\bCTF\b/
+/安全竞赛/
+/白帽子|白帽黑客/
+
+# ───────────────────────────────────────────────────────────────
+#                         运维/SRE
+# ───────────────────────────────────────────────────────────────
+
+[运维通用]
+运维
+/\bSRE\b|站点可靠性/
+/系统运维|IT运维/
+
+[DevOps]
+/\bDevOps\b/
+/\bCI\/CD\b|\bCI\b|\bCD\b/
+/持续集成|持续部署/
+/\bJenkins\b|\bGitLab CI\b|\bGitHub Actions\b/
+/\bArgoCD\b|\bFlux\b/
+
+[容器化]
+/\bDocker\b/
+/容器化|容器技术/
 /\bKubernetes\b|\bK8s\b/
+/\bHelm\b/
+/\bPodman\b/
+/服务网格|\bService Mesh\b|\bIstio\b/
 
-[云计算]
+[监控告警]
+/监控系统/
+/\bPrometheus\b/
+/\bGrafana\b/
+/\bZabbix\b/
+/\bDatadog\b/
+/可观测性|\bObservability\b/
+/链路追踪|\bTracing\b/
+
+[日志系统]
+/\bELK\b|\bElasticsearch\b/
+/\bLogstash\b|\bKibana\b/
+/日志分析/
+
+[配置管理]
+/\bAnsible\b/
+/\bTerraform\b/
+/\bPuppet\b|\bChef\b|\bSaltStack\b/
+/基础设施即代码|\bIaC\b/
+
+[故障处理]
+/故障排查|故障恢复/
+/高可用|\bHA\b/
+/容灾|灾备/
+/宕机|服务中断/
+
+# ───────────────────────────────────────────────────────────────
+#                         网络技术
+# ───────────────────────────────────────────────────────────────
+
+[网络协议]
+/\bTCP\b|\bUDP\b/
+/\bHTTP\b|\bHTTP\/2\b|\bHTTP\/3\b/
+/\bQUIC\b/
+/\bWebSocket\b/
+/\bDNS\b/
+/\bIPv6\b/
+/\bgRPC\b/
+
+[网络设备]
+/路由器|交换机/
+/\bCisco\b|思科/
+/华为网络/
+/\bJuniper\b/
+
+[CDN/加速]
+/\bCDN\b|内容分发/
+/\bCloudflare\b/
+/\bAkamai\b/
+/\bFastly\b/
+
+[网络架构]
+/负载均衡|\bLB\b|\bNginx\b/
+/反向代理/
+/\bSD-WAN\b/
+/\bMPLS\b/
+
+# ───────────────────────────────────────────────────────────────
+#                         云计算
+# ───────────────────────────────────────────────────────────────
+
+[云厂商]
 云计算
 /阿里云|\bAliyun\b/
 /腾讯云/
-/\bAWS\b/
+/\bAWS\b|亚马逊云/
 /华为云/
-云原生
+/\bAzure\b|微软云/
+/\bGCP\b|谷歌云/
+/百度云/
+/火山引擎/
 
-[数据库]
+[云原生]
+云原生
+/\bCNCF\b/
+/\bServerless\b|无服务器/
+/\bFaaS\b|函数计算/
+/\bPaaS\b|\bSaaS\b|\bIaaS\b/
+
+[云存储]
+/对象存储|\bOSS\b|\bS3\b/
+/\bCOS\b/
+/云存储/
+
+# ───────────────────────────────────────────────────────────────
+#                         数据库
+# ───────────────────────────────────────────────────────────────
+
+[关系型数据库]
 /\bMySQL\b/
 /\bPostgreSQL\b|\bPG\b/
+/\bOracle\b|甲骨文数据库/
+/\bSQL Server\b/
+/\bMariaDB\b/
+/\bSQLite\b/
+
+[NoSQL]
 /\bRedis\b/
 /\bMongoDB\b/
+/\bCassandra\b/
+/\bCouchDB\b/
+/\bHBase\b/
+
+[新型数据库]
+/\bTiDB\b/
+/\bCockroachDB\b/
+/\bClickHouse\b/
+/图数据库|\bNeo4j\b/
+/向量数据库|\bMilvus\b|\bPinecone\b|\bWeaviate\b/
+/时序数据库|\bInfluxDB\b|\bTimescaleDB\b/
+
+[数据库技术]
+/分库分表/
+/读写分离/
+/数据库优化|\bSQL优化\b/
+/数据库迁移/
+
+# ───────────────────────────────────────────────────────────────
+#                         前端开发
+# ───────────────────────────────────────────────────────────────
+
+[前端框架]
+/\bReact\b/
+/\bVue\b|\bVue\.js\b/
+/\bAngular\b/
+/\bSvelte\b/
+/\bSolid\b/
+
+[前端工具]
+/\bWebpack\b/
+/\bVite\b/
+/\bRollup\b|\bEsbuild\b/
+/\bnpm\b|\byarn\b|\bpnpm\b/
+
+[跨端开发]
+/\bElectron\b/
+/\bTauri\b/
+/\bFlutter\b/
+/\bReact Native\b/
+/小程序/
+/\bUniApp\b/
+
+[前端技术]
+/\bCSS\b|\bSass\b|\bLess\b/
+/\bTailwind\b/
+/\bWebAssembly\b|\bWASM\b/
+/\bPWA\b/
+
+# ───────────────────────────────────────────────────────────────
+#                         后端开发
+# ───────────────────────────────────────────────────────────────
+
+[后端框架]
+/\bSpring\b|\bSpringBoot\b/
+/\bDjango\b|\bFlask\b|\bFastAPI\b/
+/\bExpress\b|\bNestJS\b|\bKoa\b/
+/\bGin\b|\bEcho\b/
+/\bLaravel\b/
+/\bRails\b/
+
+[微服务]
+微服务
+/\bDubbo\b/
+/\bSpring Cloud\b/
+/服务发现|\bConsul\b|\bEtcd\b|\bNacos\b/
+/配置中心/
+
+[消息队列]
+/\bKafka\b/
+/\bRabbitMQ\b/
+/\bRocketMQ\b/
+/\bPulsar\b/
+/消息队列|\bMQ\b/
+
+[API]
+/\bAPI\b|接口/
+/\bRESTful\b|\bREST API\b/
+/\bGraphQL\b/
+/\bOpenAPI\b|\bSwagger\b/
+
+# ───────────────────────────────────────────────────────────────
+#                         大数据
+# ───────────────────────────────────────────────────────────────
+
+[大数据平台]
+大数据
+/\bHadoop\b/
+/\bSpark\b/
+/\bFlink\b/
+/数据湖|\bData Lake\b/
+
+[数据处理]
+/\bETL\b|数据清洗/
+/数据仓库|\bData Warehouse\b/
+/实时计算|流计算/
+
+[数据分析]
+数据分析
+/\bBI\b|商业智能/
+/数据可视化/
+/\bTableau\b|\bPowerBI\b/
+
+# ───────────────────────────────────────────────────────────────
+#                         操作系统
+# ───────────────────────────────────────────────────────────────
+
+[Linux]
+/\bLinux\b/
+/\bUbuntu\b/
+/\bCentOS\b|\bRocky Linux\b|\bAlmaLinux\b/
+/\bDebian\b/
+/\bArch Linux\b/
+/\bFedora\b/
+
+[其他系统]
+/\bWindows Server\b/
+/\bmacOS\b/
+/\bFreeBSD\b/
+/国产操作系统|统信|\b麒麟\b|欧拉/
+
+[内核/底层]
+/内核|Kernel/
+/\beBPF\b/
+/系统调用/
+/驱动程序/
+
+# ───────────────────────────────────────────────────────────────
+#                         硬件相关
+# ───────────────────────────────────────────────────────────────
+
+[CPU/处理器]
+/\bCPU\b|处理器/
+/\bIntel\b|英特尔/
+/\bAMD\b/
+/\bARM\b/
+/\bRISC-V\b/
+/龙芯/
+
+[GPU/显卡]
+/\bGPU\b|显卡/
+/\bNVIDIA\b|英伟达/
+/\bGeForce\b|\bRTX\b|\bQuadro\b/
+/\bAMD Radeon\b/
+
+[存储]
+/\bSSD\b|固态硬盘/
+/\bNVMe\b/
+/\bRAID\b/
+/存储阵列/
+
+[服务器]
+服务器
+/\bDell\b|戴尔服务器/
+/\bHPE\b|惠普服务器/
+/浪潮服务器/
+
+# ───────────────────────────────────────────────────────────────
+#                         开发者生态
+# ───────────────────────────────────────────────────────────────
+
+[代码托管]
+/\bGitHub\b/
+/\bGitLab\b/
+/\bGitee\b|码云/
+/\bBitbucket\b/
 
 [开源社区]
 开源
-/\bLinux\b/
 /\bApache\b/
+/\bLinux Foundation\b|Linux基金会/
+/\bCNCF\b/
+/开源协议|\bMIT\b|\bGPL\b|\bApache License\b/
+
+[技术社区]
+/\bStack Overflow\b/
+/\bHacker News\b|\bHN\b/
+/\bReddit\b/
+/掘金|稀土掘金/
+/\bV2EX\b/
+/\bSegmentFault\b/
+/\bCSDN\b/
+/博客园/
+/知乎专栏/
+
+[开发者]
 程序员
 码农
-/黑客|\bHacker\b/
+/开发者|Developer/
+/全栈|全栈工程师/
+/架构师/
+/\bCTO\b/
+/技术总监/
 
-[技术趋势]
+[技术会议]
+/技术大会|开发者大会/
+/\bKubeCon\b/
+/\bQCon\b/
+/\bGDC\b/
+/\bWWDC\b/
+/\bGoogle I\/O\b/
+/云栖大会/
+
+# ───────────────────────────────────────────────────────────────
+#                         软件工程
+# ───────────────────────────────────────────────────────────────
+
+[研发效能]
+研发效能
+/代码质量/
+/代码审查|\bCode Review\b/
+/技术债务/
+/重构/
+
+[测试]
+/单元测试|集成测试/
+/自动化测试/
+/\bTDD\b|测试驱动/
+/\bE2E\b|端到端测试/
+
+[架构设计]
+/系统架构|软件架构/
+/\bDDD\b|领域驱动/
+/分布式系统/
+/高并发/
+/高性能/
+
+[版本控制]
+/\bGit\b/
+/版本控制/
+/分支管理/
+
+# ───────────────────────────────────────────────────────────────
+#                         新兴技术
+# ───────────────────────────────────────────────────────────────
+
+[物联网]
+/物联网|\bIoT\b/
+/智能家居/
+/\bMQTT\b/
+/嵌入式/
+
+[5G/通信]
+/\b5G\b/
+/\b6G\b/
+/通信技术/
+
+[AR/VR]
+/\bAR\b|增强现实/
+/\bVR\b|虚拟现实/
+/\bXR\b|混合现实/
+/空间计算/
+
+[低代码]
 低代码
-/无服务器|\bServerless\b/
-微服务
-/\bDevOps\b/
-/边缘计算|Edge Computing/
-
-
-# ═══════════════════════════════════════════════════════════════
-#                         成人内容监控
-# ═══════════════════════════════════════════════════════════════
-
-[成人娱乐]
-/\b成人\b|情色|艳照|AV|色情|性感|裸露|诱惑|魅惑|妖娆|风骚|妩媚/ => 成人娱乐
-!儿童
-!未成年
-!强奸
-!猥亵
-!兽交
-@10
-
-[成人产业]
-/成人产业|情趣用品|性用品|成人玩具|情趣内衣|避孕套|润滑剂|震动棒|跳蛋/ => 成人产业
-!非法
-!走私
-!假冒
-@5
-
-[成人文学]
-/成人小说|情色文学|艳情小说|成人漫画|黄漫|H漫|成人动漫|春宫图/ => 成人文学
-!儿童
-!暴力
-!血腥
-@8
+无代码
+/\bNo-Code\b|\bLow-Code\b/
