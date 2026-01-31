@@ -17,6 +17,7 @@ from .tools.search_tools import SearchTools
 from .tools.config_mgmt import ConfigManagementTools
 from .tools.system import SystemManagementTools
 from .tools.storage_sync import StorageSyncTools
+from .tools.export_tools import ExportTools
 from .utils.date_parser import DateParser
 from .utils.errors import MCPError
 
@@ -37,6 +38,7 @@ def _get_tools(project_root: Optional[str] = None):
         _tools_instances['config'] = ConfigManagementTools(project_root)
         _tools_instances['system'] = SystemManagementTools(project_root)
         _tools_instances['storage'] = StorageSyncTools(project_root)
+        _tools_instances['export'] = ExportTools(project_root)
     return _tools_instances
 
 
@@ -921,13 +923,290 @@ async def list_available_dates(
     return json.dumps(result, ensure_ascii=False, indent=2)
 
 
+# ==================== 数据导出工具 ====================
+
+@mcp.tool
+async def export_news_csv(
+    date_range: Optional[Union[Dict[str, str], str]] = None,
+    platforms: Optional[List[str]] = None,
+    limit: Optional[int] = None,
+    include_url: bool = True
+) -> str:
+    """
+    导出新闻数据为 CSV 格式
+
+    将指定日期范围内的新闻数据导出为 CSV 格式，方便在 Excel 等工具中分析。
+
+    Args:
+        date_range: 日期范围，支持多种格式:
+            - 范围对象: {"start": "2025-01-01", "end": "2025-01-07"}
+            - 自然语言: "今天", "昨天", "最近7天"
+            - 单日字符串: "2025-01-15"
+        platforms: 平台ID列表，如 ['zhihu', 'weibo']，不指定则使用所有平台
+        limit: 返回条数限制，默认无限制
+        include_url: 是否包含URL链接，默认True
+
+    Returns:
+        JSON格式的导出结果，包含 CSV 内容
+
+    Examples:
+        - export_news_csv(date_range="今天")
+        - export_news_csv(date_range={"start": "2025-01-01", "end": "2025-01-07"}, platforms=['zhihu'])
+    """
+    tools = _get_tools()
+    result = await asyncio.to_thread(
+        tools['export'].export_news_csv,
+        date_range=date_range,
+        platforms=platforms,
+        limit=limit,
+        include_url=include_url
+    )
+    return json.dumps(result, ensure_ascii=False, indent=2)
+
+
+@mcp.tool
+async def export_news_json(
+    date_range: Optional[Union[Dict[str, str], str]] = None,
+    platforms: Optional[List[str]] = None,
+    limit: Optional[int] = None,
+    include_url: bool = True,
+    pretty: bool = True
+) -> str:
+    """
+    导出新闻数据为 JSON 格式
+
+    将指定日期范围内的新闻数据导出为 JSON 格式，方便程序化处理。
+
+    Args:
+        date_range: 日期范围，支持多种格式:
+            - 范围对象: {"start": "2025-01-01", "end": "2025-01-07"}
+            - 自然语言: "今天", "昨天", "最近7天"
+            - 单日字符串: "2025-01-15"
+        platforms: 平台ID列表，如 ['zhihu', 'weibo']，不指定则使用所有平台
+        limit: 返回条数限制，默认无限制
+        include_url: 是否包含URL链接，默认True
+        pretty: 是否格式化输出（缩进），默认True
+
+    Returns:
+        JSON格式的导出结果
+
+    Examples:
+        - export_news_json(date_range="最近3天")
+        - export_news_json(date_range={"start": "2025-01-01", "end": "2025-01-07"})
+    """
+    tools = _get_tools()
+    result = await asyncio.to_thread(
+        tools['export'].export_news_json,
+        date_range=date_range,
+        platforms=platforms,
+        limit=limit,
+        include_url=include_url,
+        pretty=pretty
+    )
+    return json.dumps(result, ensure_ascii=False, indent=2)
+
+
+@mcp.tool
+async def export_rss_csv(
+    feeds: Optional[List[str]] = None,
+    days: int = 7,
+    limit: Optional[int] = None,
+    include_summary: bool = False
+) -> str:
+    """
+    导出 RSS 数据为 CSV 格式
+
+    将指定时间范围内的 RSS 订阅数据导出为 CSV 格式。
+
+    Args:
+        feeds: RSS 源 ID 列表，不指定则导出所有源
+        days: 导出最近 N 天的数据，默认 7 天，最大 30 天
+        limit: 返回条数限制，默认无限制
+        include_summary: 是否包含摘要，默认False
+
+    Returns:
+        JSON格式的导出结果，包含 CSV 内容
+
+    Examples:
+        - export_rss_csv(days=7)
+        - export_rss_csv(feeds=['hacker-news', '36kr'], days=14)
+    """
+    tools = _get_tools()
+    result = await asyncio.to_thread(
+        tools['export'].export_rss_csv,
+        feeds=feeds,
+        days=days,
+        limit=limit,
+        include_summary=include_summary
+    )
+    return json.dumps(result, ensure_ascii=False, indent=2)
+
+
+@mcp.tool
+async def export_rss_json(
+    feeds: Optional[List[str]] = None,
+    days: int = 7,
+    limit: Optional[int] = None,
+    include_summary: bool = False,
+    pretty: bool = True
+) -> str:
+    """
+    导出 RSS 数据为 JSON 格式
+
+    将指定时间范围内的 RSS 订阅数据导出为 JSON 格式。
+
+    Args:
+        feeds: RSS 源 ID 列表，不指定则导出所有源
+        days: 导出最近 N 天的数据，默认 7 天，最大 30 天
+        limit: 返回条数限制，默认无限制
+        include_summary: 是否包含摘要，默认False
+        pretty: 是否格式化输出（缩进），默认True
+
+    Returns:
+        JSON格式的导出结果
+
+    Examples:
+        - export_rss_json(days=7)
+        - export_rss_json(feeds=['hacker-news'], days=30, include_summary=True)
+    """
+    tools = _get_tools()
+    result = await asyncio.to_thread(
+        tools['export'].export_rss_json,
+        feeds=feeds,
+        days=days,
+        limit=limit,
+        include_summary=include_summary,
+        pretty=pretty
+    )
+    return json.dumps(result, ensure_ascii=False, indent=2)
+
+
+# ==================== AI 对话工具 ====================
+
+@mcp.tool()
+async def chat_with_ai(
+    message: str,
+    include_context: bool = True,
+    context_type: str = "trending"
+) -> str:
+    """
+    与 AI 进行对话（复用后端 AI 配置）
+    
+    使用后端配置的 AI 模型进行对话，可以自动注入新闻上下文。
+    
+    Args:
+        message: 用户消息
+        include_context: 是否包含新闻上下文，默认 True
+        context_type: 上下文类型，trending（热点话题）或 latest（最新新闻）
+        
+    Returns:
+        AI 回复内容
+        
+    Examples:
+        - chat_with_ai("分析一下今天的热点趋势")
+        - chat_with_ai("比特币最近怎么样？", include_context=True)
+        - chat_with_ai("你好", include_context=False)
+    """
+    import os
+    try:
+        from litellm import completion
+    except ImportError:
+        return json.dumps({
+            "success": False,
+            "error": "AI 功能未安装，请安装 litellm"
+        }, ensure_ascii=False)
+    
+    # 检查 AI 配置
+    api_key = os.environ.get('AI_API_KEY', '')
+    model = os.environ.get('AI_MODEL', 'deepseek/deepseek-chat')
+    api_base = os.environ.get('AI_API_BASE', '')
+    
+    if not api_key:
+        return json.dumps({
+            "success": False,
+            "error": "AI 未配置，请在 docker/.env 中设置 AI_API_KEY"
+        }, ensure_ascii=False)
+    
+    # 获取上下文
+    context = ""
+    if include_context:
+        tools = _get_tools()
+        try:
+            if context_type == "trending":
+                topics_result = await asyncio.to_thread(
+                    tools['data'].get_trending_topics,
+                    top_n=15
+                )
+                if topics_result.get("success") and topics_result.get("topics"):
+                    topics = topics_result["topics"]
+                    context = "当前热点话题：\n" + "\n".join([
+                        f"- {t['keyword']}: {t['frequency']} 条相关新闻"
+                        for t in topics[:10]
+                    ])
+            else:
+                news_result = await asyncio.to_thread(
+                    tools['data'].get_latest_news,
+                    limit=20
+                )
+                if news_result.get("success") and news_result.get("news"):
+                    news_list = news_result["news"]
+                    context = "最新新闻：\n" + "\n".join([
+                        f"- [{n.get('source', '未知')}] {n.get('title', '')}"
+                        for n in news_list[:15]
+                    ])
+        except Exception as e:
+            context = f"(获取上下文失败: {e})"
+    
+    # 构建消息
+    system_prompt = """你是 TrendRadar 的 AI 助手，专注于新闻热点分析。
+你可以帮助用户：
+1. 分析热点趋势和话题
+2. 解读新闻背后的含义
+3. 提供投资和市场洞察
+4. 回答关于加密货币、AI、科技、股市等领域的问题
+
+请用简洁专业的中文回答。"""
+    
+    if context:
+        system_prompt += f"\n\n以下是当前的新闻数据供参考：\n{context}"
+    
+    try:
+        # 调用 AI
+        response = completion(
+            model=model,
+            api_key=api_key,
+            api_base=api_base if api_base else None,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": message}
+            ],
+            max_tokens=2000,
+            temperature=0.7
+        )
+        
+        reply = response.choices[0].message.content
+        return json.dumps({
+            "success": True,
+            "reply": reply,
+            "model": model
+        }, ensure_ascii=False)
+        
+    except Exception as e:
+        return json.dumps({
+            "success": False,
+            "error": f"AI 调用失败: {str(e)}"
+        }, ensure_ascii=False)
+
+
 # ==================== 启动入口 ====================
 
 def run_server(
     project_root: Optional[str] = None,
     transport: str = 'stdio',
     host: str = '0.0.0.0',
-    port: int = 3333
+    port: int = 3333,
+    enable_rest_api: bool = False,
+    rest_api_port: int = 8000
 ):
     """
     启动 MCP 服务器
@@ -937,6 +1216,8 @@ def run_server(
         transport: 传输模式，'stdio' 或 'http'
         host: HTTP模式的监听地址，默认 0.0.0.0
         port: HTTP模式的监听端口，默认 3333
+        enable_rest_api: 是否同时启动 REST API，默认 False
+        rest_api_port: REST API 端口，默认 8000
     """
     # 初始化工具实例
     _get_tools(project_root)
@@ -997,8 +1278,39 @@ def run_server(
     print("    19. sync_from_remote        - 从远程存储拉取数据到本地")
     print("    20. get_storage_status      - 获取存储配置和状态")
     print("    21. list_available_dates    - 列出本地/远程可用日期")
-    print("=" * 60)
     print()
+    print("    === 数据导出工具 ===")
+    print("    22. export_news_csv         - 导出新闻数据为 CSV 格式")
+    print("    23. export_news_json        - 导出新闻数据为 JSON 格式")
+    print("    24. export_rss_csv          - 导出 RSS 数据为 CSV 格式")
+    print("    25. export_rss_json         - 导出 RSS 数据为 JSON 格式")
+    print()
+    print("    === AI 对话工具 ===")
+    print("    26. chat_with_ai            - AI 对话（复用后端配置）")
+    print("=" * 60)
+    
+    if enable_rest_api:
+        print()
+        print("  REST API 已启用:")
+        print(f"    API 文档:   http://{host}:{rest_api_port}/api/docs")
+        print(f"    健康检查:   http://{host}:{rest_api_port}/api/v1/health")
+        print("=" * 60)
+    
+    print()
+
+    # 启动 REST API（如果启用）
+    rest_api_thread = None
+    if enable_rest_api:
+        import threading
+        from .rest_api import app as rest_app
+        import uvicorn
+        
+        def run_rest_api():
+            uvicorn.run(rest_app, host=host, port=rest_api_port, log_level="warning")
+        
+        rest_api_thread = threading.Thread(target=run_rest_api, daemon=True)
+        rest_api_thread.start()
+        print(f"  REST API 已在后台启动: http://{host}:{rest_api_port}")
 
     # 根据传输模式运行服务器
     if transport == 'stdio':
@@ -1046,6 +1358,17 @@ if __name__ == '__main__':
         '--project-root',
         help='项目根目录路径'
     )
+    parser.add_argument(
+        '--enable-rest-api',
+        action='store_true',
+        help='同时启动 REST API 服务'
+    )
+    parser.add_argument(
+        '--rest-api-port',
+        type=int,
+        default=8000,
+        help='REST API 端口，默认 8000'
+    )
 
     args = parser.parse_args()
 
@@ -1053,5 +1376,7 @@ if __name__ == '__main__':
         project_root=args.project_root,
         transport=args.transport,
         host=args.host,
-        port=args.port
+        port=args.port,
+        enable_rest_api=args.enable_rest_api,
+        rest_api_port=args.rest_api_port
     )

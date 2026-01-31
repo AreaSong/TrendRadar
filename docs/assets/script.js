@@ -3495,3 +3495,158 @@ function fillRssUrl(url) {
         }, 500);
     }
 }
+
+// ==========================================
+// 导入导出功能
+// ==========================================
+
+/**
+ * 导出当前配置到文件
+ */
+function exportConfig() {
+    try {
+        const activeTab = document.querySelector('.tab-button.active').id;
+        let content, filename;
+        
+        if (activeTab === 'tab-config') {
+            content = document.getElementById('yaml-editor').value;
+            filename = 'config.yaml';
+        } else {
+            content = document.getElementById('frequency-editor').value;
+            filename = 'frequency_words.txt';
+        }
+        
+        const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+        
+        showToast(`已导出 ${filename}`, 'success');
+    } catch (err) {
+        console.error('导出失败:', err);
+        showToast('导出失败: ' + err.message, 'error');
+    }
+}
+
+/**
+ * 触发文件导入对话框
+ */
+function importConfig() {
+    document.getElementById('import-file-input').click();
+}
+
+/**
+ * 处理文件导入
+ */
+function handleFileImport(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const content = e.target.result;
+            const filename = file.name.toLowerCase();
+            
+            if (filename.endsWith('.yaml') || filename.endsWith('.yml')) {
+                // 验证 YAML 语法
+                try {
+                    jsyaml.load(content);
+                } catch (yamlErr) {
+                    showToast(`YAML 语法错误: ${yamlErr.message}`, 'error');
+                    return;
+                }
+                
+                document.getElementById('yaml-editor').value = content;
+                currentYaml = content;
+                syncYamlToUI();
+                switchTab('config');
+                showToast(`已导入 ${file.name}`, 'success');
+            } else if (filename.endsWith('.txt')) {
+                document.getElementById('frequency-editor').value = content;
+                currentFrequency = content;
+                syncFrequencyToUI();
+                switchTab('frequency');
+                showToast(`已导入 ${file.name}`, 'success');
+            } else {
+                showToast('不支持的文件格式，请选择 .yaml/.yml 或 .txt 文件', 'error');
+                return;
+            }
+            
+            saveToLocalStorage();
+            
+        } catch (err) {
+            console.error('导入失败:', err);
+            showToast('导入失败: ' + err.message, 'error');
+        }
+    };
+    
+    reader.readAsText(file, 'UTF-8');
+    // 重置 input 以允许再次选择同一文件
+    event.target.value = '';
+}
+
+// ==========================================
+// 配置搜索功能
+// ==========================================
+
+/**
+ * 搜索配置内容
+ */
+function handleConfigSearch(query) {
+    query = query.trim().toLowerCase();
+    const activeTab = document.querySelector('.tab-button.active').id;
+    
+    if (activeTab === 'tab-config') {
+        // 搜索配置模块
+        const modules = document.querySelectorAll('#config-panel > div');
+        modules.forEach(module => {
+            const text = module.textContent.toLowerCase();
+            if (!query || text.includes(query)) {
+                module.classList.remove('hidden');
+                // 高亮匹配的模块
+                if (query && text.includes(query)) {
+                    module.classList.add('ring-2', 'ring-blue-200');
+                } else {
+                    module.classList.remove('ring-2', 'ring-blue-200');
+                }
+            } else {
+                module.classList.add('hidden');
+                module.classList.remove('ring-2', 'ring-blue-200');
+            }
+        });
+        
+        // 同时搜索模块导航
+        const navButtons = document.querySelectorAll('#module-nav button');
+        navButtons.forEach(btn => {
+            const text = btn.textContent.toLowerCase();
+            if (!query || text.includes(query)) {
+                btn.classList.remove('opacity-30');
+            } else {
+                btn.classList.add('opacity-30');
+            }
+        });
+    } else {
+        // 搜索关键词组
+        const groups = document.querySelectorAll('#frequency-panel > div');
+        groups.forEach(group => {
+            const text = group.textContent.toLowerCase();
+            if (!query || text.includes(query)) {
+                group.classList.remove('hidden');
+                if (query && text.includes(query)) {
+                    group.classList.add('ring-2', 'ring-blue-200');
+                } else {
+                    group.classList.remove('ring-2', 'ring-blue-200');
+                }
+            } else {
+                group.classList.add('hidden');
+                group.classList.remove('ring-2', 'ring-blue-200');
+            }
+        });
+    }
+}

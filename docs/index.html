@@ -35,6 +35,13 @@
                 <button onclick="openLoadConfigModal()" class="text-xs text-blue-600 hover:text-blue-800 underline flex items-center gap-1">
                     <i class="fa-solid fa-cloud-arrow-down"></i>加载官网最新配置
                 </button>
+                <button onclick="exportConfig()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded text-sm font-medium transition-colors flex items-center gap-1.5" title="导出配置到文件">
+                    <i class="fa-solid fa-file-export"></i>导出
+                </button>
+                <button onclick="importConfig()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded text-sm font-medium transition-colors flex items-center gap-1.5" title="从文件导入配置">
+                    <i class="fa-solid fa-file-import"></i>导入
+                </button>
+                <input type="file" id="import-file-input" accept=".yaml,.yml,.txt" class="hidden" onchange="handleFileImport(event)">
                 <button onclick="copyResult()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded text-sm font-medium transition-colors shadow-sm">
                     <i class="fa-regular fa-copy mr-1.5"></i>复制配置
                 </button>
@@ -97,6 +104,12 @@
                     <button onclick="resetToDefault()" class="text-xs text-gray-400 hover:text-red-500 transition-colors px-2 py-1" title="重置当前内容为默认状态">
                         <i class="fa-solid fa-rotate-left"></i>
                     </button>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="relative">
+                        <input type="text" id="config-search" placeholder="搜索配置..." oninput="handleConfigSearch(this.value)" class="text-xs px-3 py-1.5 pl-8 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-40">
+                        <i class="fa-solid fa-search absolute left-2.5 top-1/2 transform -translate-y-1/2 text-gray-400 text-xs"></i>
+                    </div>
                 </div>
             </div>
 

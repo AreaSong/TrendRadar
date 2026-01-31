@@ -55,6 +55,55 @@ platforms:
     - id: "zhihu"
       name: "知乎"
 
+    # ═══════════════════════════════════════════════════════════════
+    #                         科技/数码
+    # ═══════════════════════════════════════════════════════════════
+    - id: "36kr"
+      name: "36氪"
+    - id: "ithome"
+      name: "IT之家"
+    - id: "huxiu"
+      name: "虎嗅"
+    - id: "geekpark"
+      name: "极客公园"
+    - id: "sspai"
+      name: "少数派"
+    - id: "v2ex"
+      name: "V2EX"
+    - id: "nodeseek"
+      name: "NodeSeek"
+    - id: "coolapk"
+      name: "酷安"
+
+    # ═══════════════════════════════════════════════════════════════
+    #                         财经/金融
+    # ═══════════════════════════════════════════════════════════════
+    - id: "xueqiu"
+      name: "雪球"
+    - id: "eastmoney"
+      name: "东方财富"
+
+    # ═══════════════════════════════════════════════════════════════
+    #                         新闻资讯
+    # ═══════════════════════════════════════════════════════════════
+    - id: "jiemian"
+      name: "界面新闻"
+    - id: "guancha"
+      name: "观察者网"
+
+    # ═══════════════════════════════════════════════════════════════
+    #                         社区/论坛
+    # ═══════════════════════════════════════════════════════════════
+    - id: "hupu"
+      name: "虎扑"
+
+    # ═══════════════════════════════════════════════════════════════
+    #                         国际/开发者
+    # ═══════════════════════════════════════════════════════════════
+    - id: "github-trending"
+      name: "GitHub Trending"
+    - id: "producthunt"
+      name: "Product Hunt"
 
 
 # ===============================================================
@@ -90,27 +139,448 @@ rss:
   # - 正整数：覆盖全局设置，只推送此天数内的文章
   # - 0：禁用此频道的新鲜度过滤，推送所有文章
   feeds:
+    # ═══════════════════════════════════════════════════════════════
+    #                     AI 公司官方博客
+    # ═══════════════════════════════════════════════════════════════
+
+    - id: "openai-blog"
+      name: "OpenAI 官方博客"
+      url: "https://openai.com/blog/rss.xml"
+
+    - id: "anthropic-news"
+      name: "Anthropic (Claude)"
+      url: "https://www.anthropic.com/rss.xml"
+
+    - id: "google-ai-blog"
+      name: "Google AI Blog"
+      url: "https://blog.google/technology/ai/rss/"
+
+    - id: "deepmind-blog"
+      name: "DeepMind Blog"
+      url: "https://deepmind.google/blog/rss.xml"
+
+    - id: "microsoft-ai"
+      name: "Microsoft AI Blog"
+      url: "https://blogs.microsoft.com/ai/feed/"
+
+    - id: "meta-ai"
+      name: "Meta AI Blog"
+      url: "https://ai.meta.com/blog/rss/"
+
+    - id: "nvidia-blog"
+      name: "NVIDIA Blog"
+      url: "https://blogs.nvidia.com/feed/"
+
+    # ═══════════════════════════════════════════════════════════════
+    #                     开发者平台官方
+    # ═══════════════════════════════════════════════════════════════
+
+    - id: "github-blog"
+      name: "GitHub Blog"
+      url: "https://github.blog/feed/"
+
+    - id: "github-changelog"
+      name: "GitHub Changelog"
+      url: "https://github.blog/changelog/feed/"
+
+    - id: "vercel-blog"
+      name: "Vercel Blog"
+      url: "https://vercel.com/atom"
+
+    - id: "cloudflare-blog"
+      name: "Cloudflare Blog"
+      url: "https://blog.cloudflare.com/rss/"
+
+    - id: "docker-blog"
+      name: "Docker Blog"
+      url: "https://www.docker.com/blog/feed/"
+
+    # ═══════════════════════════════════════════════════════════════
+    #                     AI/ML 技术社区
+    # ═══════════════════════════════════════════════════════════════
+
+    - id: "huggingface-blog"
+      name: "Hugging Face Blog"
+      url: "https://huggingface.co/blog/feed.xml"
+
+    - id: "pytorch-blog"
+      name: "PyTorch Blog"
+      url: "https://pytorch.org/blog/feed.xml"
+
+    - id: "tensorflow-blog"
+      name: "TensorFlow Blog"
+      url: "https://blog.tensorflow.org/feeds/posts/default?alt=rss"
+
+    - id: "openai-research"
+      name: "OpenAI Research"
+      url: "https://openai.com/research/rss.xml"
+
+    # ═══════════════════════════════════════════════════════════════
+    #                     编程语言/框架官方
+    # ═══════════════════════════════════════════════════════════════
+
+    - id: "rust-blog"
+      name: "Rust Blog"
+      url: "https://blog.rust-lang.org/feed.xml"
+
+    - id: "go-blog"
+      name: "Go Blog"
+      url: "https://go.dev/blog/feed.atom"
+
+    - id: "python-insider"
+      name: "Python Insider"
+      url: "https://blog.python.org/feeds/posts/default?alt=rss"
+
+    - id: "nodejs-blog"
+      name: "Node.js Blog"
+      url: "https://nodejs.org/en/feed/blog.xml"
+
+    - id: "deno-blog"
+      name: "Deno Blog"
+      url: "https://deno.com/blog/rss.xml"
+
+    - id: "react-blog"
+      name: "React Blog"
+      url: "https://react.dev/rss.xml"
+
+    - id: "vuejs-blog"
+      name: "Vue.js Blog"
+      url: "https://blog.vuejs.org/feed.rss"
+
+    - id: "svelte-blog"
+      name: "Svelte Blog"
+      url: "https://svelte.dev/blog/rss.xml"
+
+    - id: "nextjs-blog"
+      name: "Next.js Blog"
+      url: "https://nextjs.org/feed.xml"
+
+    - id: "astro-blog"
+      name: "Astro Blog"
+      url: "https://astro.build/rss.xml"
+
+    # ═══════════════════════════════════════════════════════════════
+    #                     云服务/基础设施
+    # ═══════════════════════════════════════════════════════════════
+
+    - id: "aws-news"
+      name: "AWS News Blog"
+      url: "https://aws.amazon.com/blogs/aws/feed/"
+
+    - id: "azure-updates"
+      name: "Azure Updates"
+      url: "https://azure.microsoft.com/en-us/updates/feed/"
+
+    - id: "gcp-blog"
+      name: "Google Cloud Blog"
+      url: "https://cloud.google.com/blog/rss"
+
+    - id: "kubernetes-blog"
+      name: "Kubernetes Blog"
+      url: "https://kubernetes.io/feed.xml"
+
+    - id: "hashicorp-blog"
+      name: "HashiCorp Blog"
+      url: "https://www.hashicorp.com/blog/feed.xml"
+
+    - id: "supabase-blog"
+      name: "Supabase Blog"
+      url: "https://supabase.com/blog/rss.xml"
+
+    - id: "planetscale-blog"
+      name: "PlanetScale Blog"
+      url: "https://planetscale.com/blog/rss.xml"
+
+    # ═══════════════════════════════════════════════════════════════
+    #                     技术社区/聚合
+    # ═══════════════════════════════════════════════════════════════
+
+    - id: "lobsters"
+      name: "Lobsters"
+      url: "https://lobste.rs/rss"
+
+    - id: "reddit-programming"
+      name: "Reddit r/programming"
+      url: "https://www.reddit.com/r/programming/.rss"
+
+    - id: "reddit-rust"
+      name: "Reddit r/rust"
+      url: "https://www.reddit.com/r/rust/.rss"
+
+    - id: "reddit-golang"
+      name: "Reddit r/golang"
+      url: "https://www.reddit.com/r/golang/.rss"
+
+    - id: "dev-to"
+      name: "DEV Community"
+      url: "https://dev.to/feed"
+
+    - id: "medium-programming"
+      name: "Medium Programming"
+      url: "https://medium.com/feed/tag/programming"
+
+    # ═══════════════════════════════════════════════════════════════
+    #                     科技新闻媒体
+    # ═══════════════════════════════════════════════════════════════
+
     - id: "hacker-news"
       name: "Hacker News"
       url: "https://hnrss.org/frontpage"
-      # max_age_days: 1               # 示例：只推送1天内的文章
+
+    - id: "techcrunch"
+      name: "TechCrunch"
+      url: "https://techcrunch.com/feed/"
+
+    - id: "the-verge"
+      name: "The Verge"
+      url: "https://www.theverge.com/rss/index.xml"
+
+    - id: "ars-technica"
+      name: "Ars Technica"
+      url: "https://feeds.arstechnica.com/arstechnica/index"
+
+    - id: "wired"
+      name: "Wired"
+      url: "https://www.wired.com/feed/rss"
+
+    - id: "mit-tech-review"
+      name: "MIT Technology Review"
+      url: "https://www.technologyreview.com/feed/"
+
+    # ═══════════════════════════════════════════════════════════════
+    #                     安全资讯
+    # ═══════════════════════════════════════════════════════════════
+
+    - id: "krebs-security"
+      name: "Krebs on Security"
+      url: "https://krebsonsecurity.com/feed/"
+
+    - id: "the-hacker-news"
+      name: "The Hacker News (安全)"
+      url: "https://feeds.feedburner.com/TheHackersNews"
+
+    - id: "bleeping-computer"
+      name: "BleepingComputer"
+      url: "https://www.bleepingcomputer.com/feed/"
+
+    # ═══════════════════════════════════════════════════════════════
+    #                     中文技术博客
+    # ═══════════════════════════════════════════════════════════════
 
     - id: "ruanyifeng"
       name: "阮一峰的网络日志"
       url: "http://www.ruanyifeng.com/blog/atom.xml"
-      # max_age_days: 7               # 示例：推送7天内的文章（更新较慢的博客）
-    
-    - id: "yahoo-finance"
-      name: "雅虎财经"
-      url: "https://finance.yahoo.com/news/rssindex"
-      enabled: false                  # 禁用
+      max_age_days: 7
 
-    # 自定义源示例
-    # - id: "custom-feed"
-    #   name: "自定义源"
-    #   url: "https://example.com/feed.xml"
-    #   enabled: false
-    #   max_age_days: 0               # 示例：禁用过滤，推送所有文章
+    - id: "coolshell"
+      name: "酷壳 (陈皓)"
+      url: "https://coolshell.cn/feed"
+      max_age_days: 30
+
+    - id: "overreacted"
+      name: "Overreacted (Dan Abramov)"
+      url: "https://overreacted.io/rss.xml"
+
+    - id: "kentcdodds"
+      name: "Kent C. Dodds"
+      url: "https://kentcdodds.com/blog/rss.xml"
+
+    - id: "joshwcomeau"
+      name: "Josh W Comeau"
+      url: "https://www.joshwcomeau.com/rss.xml"
+
+    - id: "cassidoo"
+      name: "Cassidy Williams"
+      url: "https://cassidoo.co/rss.xml"
+
+    - id: "martin-fowler"
+      name: "Martin Fowler"
+      url: "https://martinfowler.com/feed.atom"
+
+    - id: "julia-evans"
+      name: "Julia Evans"
+      url: "https://jvns.ca/atom.xml"
+
+    - id: "antirez"
+      name: "Antirez (Redis作者)"
+      url: "http://antirez.com/rss"
+
+    - id: "tldr-tech"
+      name: "TLDR Newsletter"
+      url: "https://tldr.tech/rss"
+
+    # ═══════════════════════════════════════════════════════════════
+    #                     产品发布/更新
+    # ═══════════════════════════════════════════════════════════════
+
+    - id: "product-hunt"
+      name: "Product Hunt"
+      url: "https://www.producthunt.com/feed"
+
+    - id: "alternativeto"
+      name: "AlternativeTo"
+      url: "https://alternativeto.net/news/feed/"
+
+    - id: "betalist"
+      name: "BetaList"
+      url: "https://betalist.com/feed"
+
+    # ═══════════════════════════════════════════════════════════════
+    #                     加密货币/区块链
+    # ═══════════════════════════════════════════════════════════════
+
+    - id: "coindesk"
+      name: "CoinDesk"
+      url: "https://www.coindesk.com/arc/outboundfeeds/rss/"
+
+    - id: "cointelegraph"
+      name: "Cointelegraph"
+      url: "https://cointelegraph.com/rss"
+
+    - id: "theblock"
+      name: "The Block"
+      url: "https://www.theblock.co/rss.xml"
+
+    - id: "decrypt"
+      name: "Decrypt"
+      url: "https://decrypt.co/feed"
+
+    - id: "bankless"
+      name: "Bankless"
+      url: "https://www.bankless.com/rss.xml"
+
+    - id: "defiant"
+      name: "The Defiant"
+      url: "https://thedefiant.io/feed"
+
+    - id: "foresight-news"
+      name: "Foresight News"
+      url: "https://foresightnews.pro/rss"
+
+    - id: "messari"
+      name: "Messari Research"
+      url: "https://messari.io/rss"
+
+    - id: "defillama"
+      name: "DeFiLlama News"
+      url: "https://defillama.com/rss/news"
+
+    # ═══════════════════════════════════════════════════════════════
+    #                     中国金融/A股
+    # ═══════════════════════════════════════════════════════════════
+
+    - id: "gelonghui"
+      name: "格隆汇"
+      url: "https://www.gelonghui.com/rss"
+
+    - id: "jin10"
+      name: "金十数据"
+      url: "https://www.jin10.com/rss"
+
+    # ═══════════════════════════════════════════════════════════════
+    #                     美股/港股/全球市场
+    # ═══════════════════════════════════════════════════════════════
+
+    - id: "cnbc-markets"
+      name: "CNBC Markets"
+      url: "https://www.cnbc.com/id/20910258/device/rss/rss.html"
+
+    - id: "bloomberg-markets"
+      name: "Bloomberg Markets"
+      url: "https://feeds.bloomberg.com/markets/news.rss"
+
+    - id: "yahoo-finance"
+      name: "Yahoo Finance"
+      url: "https://finance.yahoo.com/news/rssindex"
+
+    - id: "seeking-alpha"
+      name: "Seeking Alpha"
+      url: "https://seekingalpha.com/feed.xml"
+
+    - id: "marketwatch"
+      name: "MarketWatch"
+      url: "http://feeds.marketwatch.com/marketwatch/topstories/"
+
+    - id: "investing-com"
+      name: "Investing.com"
+      url: "https://www.investing.com/rss/news.rss"
+
+    - id: "zhitongcaijing"
+      name: "智通财经"
+      url: "https://www.zhitongcaijing.com/rss.xml"
+
+    - id: "futunn"
+      name: "富途牛牛资讯"
+      url: "https://news.futunn.com/rss"
+
+    # ═══════════════════════════════════════════════════════════════
+    #                     政治/时政新闻
+    # ═══════════════════════════════════════════════════════════════
+
+    # --- 中国官方媒体 ---
+    - id: "xinhua"
+      name: "新华网"
+      url: "http://www.xinhuanet.com/politics/news_politics.xml"
+
+    - id: "people-cn"
+      name: "人民网-时政"
+      url: "http://politics.people.com.cn/rss/politics.xml"
+
+    - id: "cctv-news"
+      name: "央视新闻"
+      url: "https://news.cctv.com/rss/china.xml"
+
+    # --- 港澳台/华语媒体 ---
+    - id: "zaobao"
+      name: "联合早报"
+      url: "https://www.zaobao.com/rss/realtime/china"
+
+    - id: "initium"
+      name: "端传媒"
+      url: "https://theinitium.com/newsfeed/"
+      max_age_days: 7
+
+    - id: "rfi-cn"
+      name: "法广中文"
+      url: "https://www.rfi.fr/cn/rss"
+
+    - id: "dw-cn"
+      name: "德国之声中文"
+      url: "https://rss.dw.com/xml/rss-chi-all"
+
+    # --- 国际主流媒体 ---
+    - id: "bbc-world"
+      name: "BBC World News"
+      url: "https://feeds.bbci.co.uk/news/world/rss.xml"
+
+    - id: "reuters-world"
+      name: "Reuters World"
+      url: "https://www.reutersagency.com/feed/?best-topics=political-general"
+
+    - id: "nyt-world"
+      name: "NYT World"
+      url: "https://rss.nytimes.com/services/xml/rss/nyt/World.xml"
+
+    - id: "guardian-world"
+      name: "The Guardian World"
+      url: "https://www.theguardian.com/world/rss"
+
+    - id: "politico"
+      name: "Politico"
+      url: "https://www.politico.com/rss/politicopicks.xml"
+
+    - id: "foreign-affairs"
+      name: "Foreign Affairs"
+      url: "https://www.foreignaffairs.com/rss.xml"
+
+    # --- 财经政策 ---
+    - id: "ft-world"
+      name: "Financial Times World"
+      url: "https://www.ft.com/world?format=rss"
+
+    - id: "economist"
+      name: "The Economist"
+      url: "https://www.economist.com/international/rss.xml"
 
 
 # ===============================================================
@@ -229,10 +699,10 @@ notification:
   #   执行时间不稳定，时间范围建议至少留足 2 小时
   # 💡 想要精准定时？建议使用 Docker 部署在个人服务器上
   push_window:
-    enabled: false                    # 是否启用推送时间窗口控制
-    start: "20:00"                    # 开始时间（北京时间）
+    enabled: true                     # 是否启用推送时间窗口控制
+    start: "08:00"                    # 开始时间（北京时间）
     end: "22:00"                      # 结束时间（北京时间）
-    once_per_day: true                # true=窗口内只推送一次，false=窗口内每次执行都推送
+    once_per_day: false               # true=窗口内只推送一次，false=窗口内每次执行都推送
 
   # 推送渠道配置
   channels:
@@ -438,7 +908,7 @@ ai_analysis:
                                       # GitHub Action 部署默认推送约 20 次（每小时推送一次）， 约 0.1 元/天
                                       # Docker 部署默认推送 48 次(每半小时推送一次)， 约 0.2 元/天
 
-  include_rss: false                 # 是否包含 RSS 内容进行分析
+  include_rss: true                  # 是否包含 RSS 内容进行分析
 
   include_rank_timeline: true      # 是否传递完整排名时间线
                                     # false: 使用简化格式（排名范围+时间范围+出现次数）
@@ -453,12 +923,12 @@ ai_analysis:
 # 模型配置见上方 ai 配置段
 # ===============================================================
 ai_translation:
-  enabled: false                    # 是否启用翻译功能
+  enabled: true                     # 是否启用翻译功能
 
   # 翻译目标语言
   # 格式：自然语言描述
   # 示例: "Chinese", "Korean", "法语"
-  language: "English"
+  language: "Chinese"               # 英文 RSS 源内容翻译成中文
 
   # 提示词配置文件路径（相对于 config 目录）
   prompt_file: "ai_translation_prompt.txt"

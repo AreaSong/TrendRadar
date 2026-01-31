@@ -63,6 +63,7 @@ services:
 
     ports:
       - "127.0.0.1:3333:3333"
+      - "127.0.0.1:${REST_API_PORT:-8000}:${REST_API_PORT:-8000}"
 
     volumes:
       - ../config:/app/config:ro
@@ -70,3 +71,6 @@ services:
 
     environment:
       - TZ=Asia/Shanghai
+      # REST API 配置
+      - ENABLE_REST_API=${ENABLE_REST_API:-false}
+      - REST_API_PORT=${REST_API_PORT:-8000}

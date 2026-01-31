@@ -12,12 +12,15 @@ dependencies = [
     "feedparser>=6.0.0,<7.0.0",
     "boto3>=1.35.0,<2.0.0",
     "litellm>=1.57.0,<2.0.0",
-    "tenacity==8.5.0"
+    "tenacity==8.5.0",
+    "fastapi>=0.115.0,<1.0.0",
+    "uvicorn[standard]>=0.32.0,<1.0.0"
 ]
 
 [project.scripts]
 trendradar = "trendradar.__main__:main"
 trendradar-mcp = "mcp_server.server:run_server"
+trendradar-api = "mcp_server.rest_api:run_rest_api"
 
 [dependency-groups]
 dev = []

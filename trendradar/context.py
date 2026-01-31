@@ -28,6 +28,7 @@ from trendradar.report import (
     clean_title,
     prepare_report_data,
     generate_html_report,
+    generate_dashboard,
     render_html_content,
 )
 from trendradar.notification import (
@@ -302,7 +303,7 @@ class AppContext:
         standalone_data: Optional[Dict] = None,
     ) -> str:
         """生成HTML报告"""
-        return generate_html_report(
+        html_path = generate_html_report(
             stats=stats,
             total_titles=total_titles,
             failed_ids=failed_ids,
@@ -318,6 +319,20 @@ class AppContext:
             matches_word_groups_func=self.matches_word_groups,
             load_frequency_words_func=self.load_frequency_words,
         )
+        
+        # 同时生成实时仪表盘
+        try:
+            dashboard_path = generate_dashboard(
+                stats=stats,
+                total_titles=total_titles,
+                output_dir="output",
+                refresh_interval=300,  # 5 分钟自动刷新
+            )
+            print(f"仪表盘已生成: {dashboard_path}")
+        except Exception as e:
+            print(f"仪表盘生成失败: {e}")
+        
+        return html_path
 
     def render_html(
         self,

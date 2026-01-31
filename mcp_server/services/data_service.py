@@ -890,3 +890,152 @@ class DataService:
         self.cache.set(cache_key, result)
 
         return result
+
+    # ========================================
+    # 数据导出方法
+    # ========================================
+
+    def get_news_for_export(
+        self,
+        date_range: Optional[Tuple[datetime, datetime]] = None,
+        platforms: Optional[List[str]] = None,
+        limit: Optional[int] = None,
+        include_url: bool = True
+    ) -> List[Dict]:
+        """
+        获取新闻数据用于导出
+
+        Args:
+            date_range: 日期范围 (start_date, end_date)
+            platforms: 平台过滤列表
+            limit: 返回条数限制
+            include_url: 是否包含URL链接
+
+        Returns:
+            新闻数据列表
+        """
+        # 确定日期范围
+        if date_range:
+            start_date, end_date = date_range
+        else:
+            # 默认今天
+            start_date = end_date = datetime.now()
+
+        results = []
+        current_date = start_date
+
+        while current_date <= end_date:
+            try:
+                all_titles, id_to_name, timestamps = self.parser.read_all_titles_for_date(
+                    date=current_date,
+                    platform_ids=platforms
+                )
+
+                # 获取抓取时间
+                if timestamps:
+                    latest_timestamp = max(timestamps.values())
+                    fetch_time = datetime.fromtimestamp(latest_timestamp)
+                else:
+                    fetch_time = current_date
+
+                for platform_id, titles in all_titles.items():
+                    platform_name = id_to_name.get(platform_id, platform_id)
+
+                    for title, info in titles.items():
+                        news_item = {
+                            "date": current_date.strftime("%Y-%m-%d"),
+                            "time": fetch_time.strftime("%H:%M:%S") if isinstance(fetch_time, datetime) else "",
+                            "platform": platform_name,
+                            "title": title,
+                            "rank": info["ranks"][0] if info["ranks"] else 0,
+                            "hotness": info.get("hot", "")
+                        }
+
+                        if include_url:
+                            news_item["url"] = info.get("url", "")
+
+                        results.append(news_item)
+
+            except DataNotFoundError:
+                pass
+
+            current_date += timedelta(days=1)
+
+        # 按日期和排名排序
+        results.sort(key=lambda x: (x["date"], x["rank"]))
+
+        # 限制返回数量
+        if limit and limit > 0:
+            results = results[:limit]
+
+        return results
+
+    def get_rss_for_export(
+        self,
+        feeds: Optional[List[str]] = None,
+        days: int = 7,
+        limit: Optional[int] = None,
+        include_summary: bool = False
+    ) -> List[Dict]:
+        """
+        获取 RSS 数据用于导出
+
+        Args:
+            feeds: RSS 源 ID 列表
+            days: 导出最近 N 天的数据
+            limit: 返回条数限制
+            include_summary: 是否包含摘要
+
+        Returns:
+            RSS 数据列表
+        """
+        days = min(max(days, 1), 30)
+        results = []
+        seen_urls = set()
+        today = datetime.now()
+
+        for i in range(days):
+            target_date = today - timedelta(days=i)
+
+            try:
+                all_items, id_to_name, _ = self.parser.read_all_titles_for_date(
+                    date=target_date,
+                    platform_ids=feeds,
+                    db_type="rss"
+                )
+
+                for feed_id, items in all_items.items():
+                    feed_name = id_to_name.get(feed_id, feed_id)
+
+                    for title, info in items.items():
+                        url = info.get("url", "")
+                        if url and url in seen_urls:
+                            continue
+                        if url:
+                            seen_urls.add(url)
+
+                        rss_item = {
+                            "date": target_date.strftime("%Y-%m-%d"),
+                            "feed_id": feed_id,
+                            "feed_name": feed_name,
+                            "title": title,
+                            "url": url,
+                            "published": info.get("published_at", "")
+                        }
+
+                        if include_summary:
+                            rss_item["summary"] = info.get("summary", "")
+
+                        results.append(rss_item)
+
+            except DataNotFoundError:
+                continue
+
+        # 按发布时间排序
+        results.sort(key=lambda x: x.get("published", ""), reverse=True)
+
+        # 限制返回数量
+        if limit and limit > 0:
+            results = results[:limit]
+
+        return results
